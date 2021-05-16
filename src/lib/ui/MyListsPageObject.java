@@ -8,8 +8,8 @@ abstract public class MyListsPageObject extends MainPageObject {
     protected static String
             FOLDER_BY_NAME_TPL,
             ARTICLE_BY_TITLE_TPL,
-            CLOSE_OVERLAY_SYNC_YOUR_SAVED_ARTICLES,
-            SUBTITLE_ELEMENT;
+            CLOSE_OVERLAY_SYNC_YOUR_SAVED_ARTICLES;
+
 
     public MyListsPageObject(AppiumDriver driver) {
         super(driver);
@@ -63,14 +63,6 @@ abstract public class MyListsPageObject extends MainPageObject {
         this.waitForArticleToDisappearByTitle(article_title);
     }
 
-    public void openArticleByTitle(String article_title) {
-        String article_title_xpath = getSavedArticleXPathByTitle(article_title);
-        this.waitForElementAndClick(
-                article_title_xpath,
-                "Cannot find title by name " + article_title,
-                10
-        );
-    }
 
     public void tapCloseButtonInOverlayScreenInSaved() {
         this.waitForElementAndClick(CLOSE_OVERLAY_SYNC_YOUR_SAVED_ARTICLES, "Cannot find 'Close' button on overlay screen 'sync your saved articles'", 10);

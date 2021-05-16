@@ -10,8 +10,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
         OPTIONS_ADD_TO_MY_LIST_BUTTON = "id:Save for later";
         CLOSE_ARTICLE_BUTTON = "id:Back";
         CANCEL_SEARCH_BUTTON="id:Cancel";
-
-
+        ELEMENT_TYPE_NAVIGATION_BAR="id:JavaScript";
     }
     public iOSArticlePageObject(AppiumDriver driver) {
         super(driver);

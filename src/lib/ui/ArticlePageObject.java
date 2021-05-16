@@ -17,6 +17,7 @@ abstract public class ArticlePageObject extends MainPageObject {
             MY_LIST_OK_BUTTON,
             CLOSE_ARTICLE_BUTTON,
             EXISTING_FOLDER,
+            ELEMENT_TYPE_NAVIGATION_BAR,
             CANCEL_SEARCH_BUTTON;
 
 
@@ -40,6 +41,22 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public WebElement waitForNavigationTypeElement() {
+        return this.waitForElementPresent(
+                ELEMENT_TYPE_NAVIGATION_BAR,
+                "Cannot find " + ELEMENT_TYPE_NAVIGATION_BAR,
+                15
+        );
+    }
+
+    public WebElement waitForNavigationTypeElement(int seconds) {
+        return this.waitForElementPresent(
+                ELEMENT_TYPE_NAVIGATION_BAR,
+                "Cannot find " + ELEMENT_TYPE_NAVIGATION_BAR,
+                seconds
+        );
+    }
+
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
         if (Platform.getInstance().isAndroid()) {
@@ -49,6 +66,10 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
+    public String getElementTypeNavigationBar() {
+        WebElement nav_element = waitForNavigationTypeElement();
+        return nav_element.getAttribute("name");
+    }
 
     public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {

@@ -56,65 +56,63 @@ public class MyListsTests extends CoreTestCase {
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
         searchPageObject.clickByArticleWithSubstring("Java (programming language)");
-
         ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
-        articlePageObject.waitForTitleElement();
-        String article_title_first = articlePageObject.getArticleTitle();
+        String article_title_first;
         if (Platform.getInstance().isAndroid()) {
-            articlePageObject.addArticleToMyList(name_of_folder);
-        } else {
-            articlePageObject.addArticlesToMySaved();
-        }
-        if (Platform.getInstance().isAndroid()) {
+            articlePageObject.waitForTitleElement();
+            article_title_first = articlePageObject.getArticleTitle();
+            articlePageObject.addArticleToExistingList();
             articlePageObject.closeArticle();
         } else {
+            articlePageObject.waitForNavigationTypeElement();
+            article_title_first = articlePageObject.getElementTypeNavigationBar();
+            articlePageObject.addArticlesToMySaved();
             articlePageObject.closeArticle();
             articlePageObject.tapCancelButtonInSearch();
         }
-
-//        articlePageObject.addArticleToMyList(name_of_folder);
-//        articlePageObject.closeArticle();
-
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
         searchPageObject.clickByArticleWithSubstring("JavaScript");
-
-        articlePageObject.waitForTitleElement();
-        String article_title_second = articlePageObject.getArticleTitle();
+        String article_title_second;
         if (Platform.getInstance().isAndroid()) {
+            articlePageObject.waitForTitleElement();
+            article_title_second = articlePageObject.getArticleTitle();
             articlePageObject.addArticleToExistingList();
-        } else {
-            articlePageObject.addArticlesToMySaved();
-        }
-        if (Platform.getInstance().isAndroid()) {
             articlePageObject.closeArticle();
         } else {
+            articlePageObject.waitForNavigationTypeElement();
+            article_title_second = articlePageObject.getElementTypeNavigationBar();
+            articlePageObject.addArticlesToMySaved();
             articlePageObject.closeArticle();
             articlePageObject.tapCancelButtonInSearch();
         }
-
         NavigationUI navigationUI = NavigationUIFactory.get(driver);
         navigationUI.clickMyLists();
-
         MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
-
         if (Platform.getInstance().isAndroid()) {
             myListsPageObject.openFolderByName(name_of_folder);
         } else {
             myListsPageObject.tapCloseButtonInOverlayScreenInSaved();
         }
-
         myListsPageObject.swipeArticleToDelete(article_title_first);
-
-        myListsPageObject.waitForArticleToAppearByTitle(article_title_second);
-//        myListsPageObject.openArticleByTitle(article_title_second);
-
-
-        String title_in_article_attribute = articlePageObject.getArticleTitle();
-
-        Assert.assertEquals(
-                "Elements isn't concur with!",
-                article_title_second,
-                title_in_article_attribute);
+        if (Platform.getInstance().isAndroid()) {
+            myListsPageObject.waitForArticleToAppearByTitle(article_title_second);
+        }
+        if (Platform.getInstance().isIOS()) {
+            myListsPageObject.waitForElementAndClick(
+                    article_title_second,
+                    "Cannot find the article " + article_title_second,
+                    15
+            );
+            String element_type_navigation_bar = articlePageObject.getElementTypeNavigationBar();
+            Assert.assertEquals("There is no expected article " + article_title_second,
+                    "JavaScript",
+                    element_type_navigation_bar);
+        } else {
+            String title_article = articlePageObject.getArticleTitle();
+            Assert.assertEquals("There is no expected article " + article_title_second,
+                    "JavaScript",
+                    title_article);
+        }
     }
 }
