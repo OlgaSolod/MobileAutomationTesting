@@ -3,7 +3,6 @@ package lib.Tests;
 import lib.CoreTestCase;
 
 import lib.ui.*;
-import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 
 import org.junit.Test;

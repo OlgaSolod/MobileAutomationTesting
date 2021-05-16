@@ -11,7 +11,7 @@ public class IOSSearchPageObject extends SearchPageObject {
         SEARCH_CANCEL_BUTTON = "id:Cancel";
         SEARCH_RESULT_ELEMENT = "xpath://XCUIElementTypeCell";
         SEARCH_EMPTY_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText[@name='No results found']";
-        //SEARCH_RESULT_BY_NAME_AND_DESCRIPTION_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']/following-sibling::*[@text='{DESCRIPTION}']";
+        SEARCH_RESULT_BY_NAME_AND_DESCRIPTION_TPL_IOS = "xpath://XCUIElementTypeCell/XCUIElementTypeStaticText[contains(@name,'{TITLE}')]/following-sibling::*[contains(@name,'{DESCRIPTION}')]";
     }
 
     public IOSSearchPageObject(AppiumDriver driver) {

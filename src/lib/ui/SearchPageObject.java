@@ -4,13 +4,14 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 abstract public class SearchPageObject extends MainPageObject {
-   protected static String
+    protected static String
             SEARCH_INIT_ELEMENT,
             SEARCH_INPUT,
             SEARCH_RESULT_BY_SUBSTRING_TPL,
             SEARCH_CANCEL_BUTTON,
             SEARCH_RESULT_ELEMENT,
             SEARCH_EMPTY_RESULT_ELEMENT,
+            SEARCH_RESULT_BY_NAME_AND_DESCRIPTION_TPL_IOS,
             SEARCH_RESULT_BY_NAME_AND_DESCRIPTION_TPL;
 
 
@@ -32,6 +33,12 @@ abstract public class SearchPageObject extends MainPageObject {
                 .replace("{TITLE}", substring_title);
     }
 
+    private static String getResultSearchElementByTwoSubstringsIOS(String substring_title, String substring_description) {
+        return SEARCH_RESULT_BY_NAME_AND_DESCRIPTION_TPL_IOS
+                .replace("{DESCRIPTION}", substring_description)
+                .replace("{TITLE}", substring_title);
+    }
+
     /*TEMPLATES METHODS*/
     public void initSearchInput() {
         this.waitForElementAndClick(
@@ -47,7 +54,7 @@ abstract public class SearchPageObject extends MainPageObject {
 
     public void waitForCancelButtonToAppear() {
         this.waitForElementPresent(
-               SEARCH_CANCEL_BUTTON,
+                SEARCH_CANCEL_BUTTON,
                 "Cannot find cancel button",
                 15
         );
@@ -55,7 +62,7 @@ abstract public class SearchPageObject extends MainPageObject {
 
     public void waitForCancelButtonToDisappear() {
         this.waitForElementNotPresent(
-               SEARCH_CANCEL_BUTTON,
+                SEARCH_CANCEL_BUTTON,
                 "Search cancel button is still present",
                 15
         );
@@ -143,12 +150,20 @@ abstract public class SearchPageObject extends MainPageObject {
     }
 
     public void waitForElementByTitleAndDescription(String title, String description) {
-        String s = getResultSearchElementByTwoSubstrings(title, description);
         this.waitForElementPresent(
-                s,
+                getResultSearchElementByTwoSubstrings(title, description),
                 "Cannot find elements with title '" + title + "' and description '" + description + "'",
                 30
         );
     }
+
+    public void waitForElementByTitleAndDescriptionIOS(String title, String description) {
+        this.waitForElementPresent(
+                getResultSearchElementByTwoSubstringsIOS(title, description),
+                "Cannot find elements with title '" + title + "' and description '" + description + "'",
+                30
+        );
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package lib.Tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
@@ -73,12 +74,19 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
-    public void testFindByTwoSubstrings() {
+    public void testFindByTwoSubstringsInThreeSearchResults() {
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
-        searchPageObject.waitForElementByTitleAndDescription("Java", "Island of Indonesia");
-        searchPageObject.waitForElementByTitleAndDescription("JavaScript", "Programming language");
-        searchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
+        if (Platform.getInstance().isAndroid()) {
+            searchPageObject.waitForElementByTitleAndDescription("Java", "Island of Indonesia");
+            searchPageObject.waitForElementByTitleAndDescription("JavaScript", "Programming language");
+            searchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
+        } else {
+            searchPageObject.waitForElementByTitleAndDescriptionIOS("Java", "Island of Indonesia");
+            searchPageObject.waitForElementByTitleAndDescriptionIOS("JavaScript", "Programming language");
+            searchPageObject.waitForElementByTitleAndDescriptionIOS("Java (programming language)", "Object-oriented programming language");
+        }
+
     }
 }
