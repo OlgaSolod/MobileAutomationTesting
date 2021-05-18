@@ -79,7 +79,7 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
         if (Platform.getInstance().isAndroid()) {
-            searchPageObject.waitForElementByTitleAndDescription("Java", "Indonesian island");
+            searchPageObject.waitForElementByTitleAndDescription("Java", "Island of Indonesia");
             searchPageObject.waitForElementByTitleAndDescription("JavaScript", "Programming language");
             searchPageObject.waitForElementByTitleAndDescription("Java (programming language)", "Object-oriented programming language");
         } else {
