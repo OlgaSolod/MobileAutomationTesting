@@ -87,6 +87,5 @@ public class SearchTests extends CoreTestCase {
             searchPageObject.waitForElementByTitleAndDescriptionIOS("JavaScript", "High-level programming language");
             searchPageObject.waitForElementByTitleAndDescriptionIOS("Java (programming language)", "Object-oriented programming language");
         }
-
     }
 }

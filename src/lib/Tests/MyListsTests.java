@@ -61,7 +61,7 @@ public class MyListsTests extends CoreTestCase {
         if (Platform.getInstance().isAndroid()) {
             articlePageObject.waitForTitleElement();
             article_title_first = articlePageObject.getArticleTitle();
-            articlePageObject.addArticleToExistingList();
+            articlePageObject.addArticleToMyList(name_of_folder);
             articlePageObject.closeArticle();
         } else {
             articlePageObject.waitForNavigationTypeElement();
@@ -109,10 +109,9 @@ public class MyListsTests extends CoreTestCase {
                     "JavaScript",
                     element_type_navigation_bar);
         } else {
-            String title_article = articlePageObject.getArticleTitle();
             Assert.assertEquals("There is no expected article " + article_title_second,
                     "JavaScript",
-                    title_article);
+                    article_title_second);
         }
     }
 }
