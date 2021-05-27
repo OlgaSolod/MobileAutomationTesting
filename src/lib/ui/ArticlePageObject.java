@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 
 import lib.Platform;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 abstract public class ArticlePageObject extends MainPageObject {
@@ -21,7 +22,7 @@ abstract public class ArticlePageObject extends MainPageObject {
             CANCEL_SEARCH_BUTTON;
 
 
-    public ArticlePageObject(AppiumDriver driver) {
+    public ArticlePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 

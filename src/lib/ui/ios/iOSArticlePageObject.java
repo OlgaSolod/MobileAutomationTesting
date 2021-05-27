@@ -2,6 +2,7 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSArticlePageObject extends ArticlePageObject {
     static {
@@ -12,7 +13,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
         CANCEL_SEARCH_BUTTON="id:Cancel";
         ELEMENT_TYPE_NAVIGATION_BAR="id:JavaScript";
     }
-    public iOSArticlePageObject(AppiumDriver driver) {
+    public iOSArticlePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 

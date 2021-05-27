@@ -2,6 +2,7 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.MyListsPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class iOSMyListsPageObject extends MyListsPageObject {
     static {
@@ -10,7 +11,7 @@ public class iOSMyListsPageObject extends MyListsPageObject {
         CLOSE_OVERLAY_SYNC_YOUR_SAVED_ARTICLES="id:Close";
     }
 
-    public iOSMyListsPageObject(AppiumDriver driver) {
+    public iOSMyListsPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 }
